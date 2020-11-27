@@ -32,7 +32,7 @@ def getChildren(snapshot, isPlayer1, movements):
 def minimax(snapshot, depth, isMaximizing, checkScore, movements):
     """
     Implementación básica de Minimax que genera un árbol de decisión
-    Un snapshot implica una fotografía del tablero, con sus fichas actuales
+    Un snapshot implica una fotografía del tablero, con sus fichas actuales\n
     Obtenido de https://www.javatpoint.com/mini-max-algorithm-in-ai
     """
     if depth == 0:
