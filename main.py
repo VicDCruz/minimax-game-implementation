@@ -36,7 +36,7 @@ def minimax(snapshot, depth, isMaximizing, checkScore, movements):
     Obtenido de https://www.javatpoint.com/mini-max-algorithm-in-ai
     """
     if depth == 0:
-        return checkScore(snapshot)
+        return checkScore(snapshot, isMaximizing)
     if isMaximizing:
         maxScore = float('-inf')
         for child in getChildren(snapshot, True, movements):
