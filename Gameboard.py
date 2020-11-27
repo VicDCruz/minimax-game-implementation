@@ -49,13 +49,17 @@ class Gameboard:
         """
         Imprimir el estado actual del tablero
         """
-        board = self.heigth * [self.width * ["\t"]]
+        board = []
+        for y in range(self.heigth):
+            board.append([])
+            for x in range(self.width):
+                board[y].append("\t")
         for chip in self.chips1:
             if chip.onGameboard:
-                board[chip.x][chip.y] = chip.figure
+                board[chip.x][chip.y] = chip.figure + "\t"
         for chip in self.chips2:
             if chip.onGameboard:
-                board[chip.x][chip.y] = chip.figure
+                board[chip.x][chip.y] = chip.figure + "\t"
         base = 8 * self.width
         print(base * "-")
         for y in range(self.heigth):
