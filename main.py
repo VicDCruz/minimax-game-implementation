@@ -32,18 +32,20 @@ def getChildren(snapshot, isPlayer1, movements):
     return output
 
 
-def minimax(snapshot, depth, isMaximizing, checkScore, movements,alpha,beta):
+def minimax(snapshot, depth, isMaximizing, checkScore, movements, alpha, beta):
     """
     Implementación básica de Minimax que genera un árbol de decisión
     Un snapshot implica una fotografía del tablero, con sus fichas actuales
     Obtenido de https://www.javatpoint.com/mini-max-algorithm-in-ai
     """
+    
+    score = 0
     if depth == 0:
         return checkScore(snapshot)
     if isMaximizing:
         maxScore = float('-inf')
         for child in getChildren(snapshot, True, movements):
-            score = minimax(child, depth - 1, False, score, movements, alpha, betha)
+            score = minimax(child, depth - 1, False, score, movements, alpha, beta)
             maxScore = max(score, maxScore)      
             
             # Alpha-beta
