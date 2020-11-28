@@ -56,7 +56,7 @@ class Gameboard:
         for chip in self.chips2:
             if chip.onGameboard:
                 board[chip.x][chip.y] = chip.figure
-        base = 8 * self.width
+        base = 4 * self.width
         print(base * "-")
         for y in range(self.heigth):
             output = ""
@@ -68,7 +68,7 @@ class Gameboard:
 
 if __name__ == "__main__":
     print("==== Tablero 3x3 ====")
-    g1 = Gameboard(3, 3, [], [])
+    g1 = Gameboard(3, 3, [Chip(1,1,True,'x')], [Chip(1,2,True,'o')])
     g1.print()
     print("==== Tablero 4x7 ====")
     g2 = Gameboard(4, 7, [], [])
