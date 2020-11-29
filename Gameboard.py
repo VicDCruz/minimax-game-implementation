@@ -4,7 +4,7 @@ class Gameboard:
     Simulación de un tablero de juegos
     """
 
-    def __init__(self, width, height, chip1, chip2):
+    def __init__(self, width, height, player, opponent):
         """
         Constructor de la clase Gameboard
         """
@@ -15,20 +15,20 @@ class Gameboard:
             self.board.append([])
             for y in range(width):
                 self.board[x].append("\t")
-        self.chip1 = chip1 + "\t"
-        self.chip2 = chip2 + "\t"
+        self.player = player + "\t"
+        self.opponent = opponent + "\t"
 
-    def addChip(self, isPlayer1, x, y):
+    def addChip(self, isPlayer, x, y):
         """
         Añadir una nueva ficha al tablero, dependiendo del jugador
         """
         if 0 <= x and x < self.height and 0 <= y and y < self.width:
-            if isPlayer1:
+            if isPlayer:
                 if self.board[x][y] == "\t":
-                    self.board[x][y] = self.chip1
+                    self.board[x][y] = self.player
             else:
                 if self.board[x][y] == "\t":
-                    self.board[x][y] = self.chip2
+                    self.board[x][y] = self.opponent
         else:
             print("Movimiento fuera de rango")
 

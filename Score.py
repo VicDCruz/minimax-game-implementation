@@ -3,16 +3,16 @@ from Gameboard import Gameboard
 from Chip import Chip
 
 
-def count(snapshot, isPlayer1):
+def count(snapshot, isPlayer):
     output = 0
     for i in range(snapshot.totalChips):
-        chip = snapshot.getChip(isPlayer1, i)
+        chip = snapshot.getChip(isPlayer, i)
         if chip.onGameboard:
             output += 1
     return output / snapshot.totalChips * 100
 
 
-def check(snapshot, isPlayer1):
+def check(snapshot, isPlayer):
     def countVertical(chips):
         rows = {}
         maximum = 0
@@ -52,7 +52,7 @@ def check(snapshot, isPlayer1):
                 maximum = max(maximum, diagonals[key])
         return maximum / len(chips) * 100
 
-    if isPlayer1:
+    if isPlayer:
         chips = snapshot.chips1
     else:
         chips = snapshot.chips2
@@ -71,7 +71,7 @@ class Score:
         """
         Regresa una función que crea puntaciones aleatorias
         """
-        def rand(snapshot, isPlayer1):
+        def rand(snapshot, isPlayer):
             return random.uniform(0, 100)
         return rand
 
