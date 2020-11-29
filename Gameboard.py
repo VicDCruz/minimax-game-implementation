@@ -24,15 +24,19 @@ class Gameboard:
         Añadir una nueva ficha al tablero, dependiendo del jugador
         """
         if 0 <= x and x < self.height and 0 <= y and y < self.width:
-            if isPlayer:
-                if self.board[x][y] == "\t":
+            if self.board[x][y] == "\t":
+                if isPlayer:
                     self.board[x][y] = self.player + "\t"
-            else:
-                if self.board[x][y] == "\t":
+                else:
                     self.board[x][y] = self.opponent + "\t"
-            self.lastMove = (x, y)
+                self.lastMove = (x, y)
+                return True
+            else:
+                print("Ya hay una pieza ahí")
+                return False
         else:
             print("Movimiento fuera de rango")
+            return False
 
     def getPlayerFormat(self):
         """

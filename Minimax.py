@@ -14,22 +14,28 @@ def minimax(snapshot, depth, isMaximizing, checkScore, getChildren):
     """
     if depth == 0:
         return [checkScore(snapshot.board, snapshot.getPlayerFormat(), snapshot.getOpponentFormat()), snapshot.lastMove]
-    bestMove = (0, 0)
+    bestMove = snapshot.lastMove
     if isMaximizing:
         maxScore = float('-inf')
-        for child in getChildren(snapshot, True):
+        children = getChildren(snapshot, True)
+        for child in children:
             result = minimax(child, depth - 1, False, checkScore, getChildren)
             maxScore = max(result[0], maxScore)
             if maxScore == result[0]:
                 bestMove = child.lastMove
+        if len(children) == 0:
+            return [checkScore(snapshot.board, snapshot.getPlayerFormat(), snapshot.getOpponentFormat()), snapshot.lastMove]
         return [maxScore, bestMove]
     else:
         minScore = float('inf')
-        for child in getChildren(snapshot, False):
+        children = getChildren(snapshot, False)
+        for child in children:
             result = minimax(child, depth - 1, True, checkScore, getChildren)
             minScore = min(result[0], minScore)
             if minScore == result[0]:
                 bestMove = child.lastMove
+        if len(children) == 0:
+            return [checkScore(snapshot.board, snapshot.getPlayerFormat(), snapshot.getOpponentFormat()), snapshot.lastMove]
         return [minScore, bestMove]
 
 

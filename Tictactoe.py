@@ -10,8 +10,8 @@ def canMove(board):
     """
     Checar si hay movimientos disponibles
     """
-    for i in range(0, 3):
-        for j in range(0, 3):
+    for i in range(3):
+        for j in range(3):
             if (board[i][j] == "\t"):
                 return True
     return False
@@ -22,11 +22,11 @@ def evaluate(board, player, opponent):
     Evaluar el tablero actual\n
     player es el jugador que pierde (-SCORE) o gana (-SCORE)
     """
-    if not canMove(board):
-        return 0
+    # if not canMove(board):
+    #     return 0
 
     # Victoria para player en una fila
-    for row in range(0, 3):
+    for row in range(3):
         if board[row][0] == board[row][1] and board[row][1] == board[row][2]:
             if board[row][0] == player:
                 return SCORE
@@ -34,7 +34,7 @@ def evaluate(board, player, opponent):
                 return -SCORE
 
     # Victoria para player en una columna
-    for col in range(0, 3):
+    for col in range(3):
         if board[0][col] == board[1][col] and board[1][col] == board[2][col]:
             if board[0][col] == player:
                 return SCORE
