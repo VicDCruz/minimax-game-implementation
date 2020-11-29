@@ -15,8 +15,9 @@ class Gameboard:
             self.board.append([])
             for y in range(width):
                 self.board[x].append("\t")
-        self.player = player + "\t"
-        self.opponent = opponent + "\t"
+        self.player = player
+        self.opponent = opponent
+        self.lastMove = (0, 0)
 
     def addChip(self, isPlayer, x, y):
         """
@@ -25,12 +26,25 @@ class Gameboard:
         if 0 <= x and x < self.height and 0 <= y and y < self.width:
             if isPlayer:
                 if self.board[x][y] == "\t":
-                    self.board[x][y] = self.player
+                    self.board[x][y] = self.player + "\t"
             else:
                 if self.board[x][y] == "\t":
-                    self.board[x][y] = self.opponent
+                    self.board[x][y] = self.opponent + "\t"
+            self.lastMove = (x, y)
         else:
             print("Movimiento fuera de rango")
+
+    def getPlayerFormat(self):
+        """
+        Regresar el String con formato para el jugador
+        """
+        return self.player + "\t"
+
+    def getOpponentFormat(self):
+        """
+        Regresar el String con formato para el oponente
+        """
+        return self.opponent + "\t"
 
     def print(self):
         """

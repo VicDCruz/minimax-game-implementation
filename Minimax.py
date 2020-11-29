@@ -13,19 +13,24 @@ def minimax(snapshot, depth, isMaximizing, checkScore, getChildren):
     Obtenido de https://www.javatpoint.com/mini-max-algorithm-in-ai
     """
     if depth == 0:
-        return checkScore(snapshot.board.copy(), snapshot.player, snapshot.opponent)
+        return [checkScore(snapshot.board, snapshot.getPlayerFormat(), snapshot.getOpponentFormat()), snapshot.lastMove]
+    bestMove = (0, 0)
     if isMaximizing:
         maxScore = float('-inf')
-        for child in getChildren(snapshot, snapshot.player):
-            maxScore = max(minimax(child, depth - 1, False,
-                                   checkScore, getChildren), maxScore)
-        return maxScore
+        for child in getChildren(snapshot, True):
+            result = minimax(child, depth - 1, False, checkScore, getChildren)
+            maxScore = max(result[0], maxScore)
+            if maxScore == result[0]:
+                bestMove = child.lastMove
+        return [maxScore, bestMove]
     else:
         minScore = float('inf')
-        for child in getChildren(snapshot, snapshot.opponent):
-            minScore = min(minimax(child, depth - 1, True,
-                                   checkScore, getChildren), minScore)
-        return minScore
+        for child in getChildren(snapshot, False):
+            result = minimax(child, depth - 1, True, checkScore, getChildren)
+            minScore = min(result[0], minScore)
+            if minScore == result[0]:
+                bestMove = child.lastMove
+        return [minScore, bestMove]
 
 
 if __name__ == "__main__":
@@ -36,5 +41,9 @@ if __name__ == "__main__":
     g.addChip(False, 2, 2)
     g.addChip(True, 0, 2)
     g.print()
-    print(minimax(g, 3, True, evaluate, generateMoves))
-    # g.print()
+    print("==== MOVIMIENTO ====")
+    res = minimax(g, 3, True, evaluate, generateMoves)
+    print("Mover la pieza a {1} (Score: {0})".format(res[0], res[1]))
+    g.addChip(False, res[1][0], res[1][1])
+    g.print()
+    print("==== MOVIMIENTO ====")

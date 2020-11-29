@@ -58,7 +58,7 @@ def evaluate(board, player, opponent):
     return 0
 
 
-def generateMoves(snapshot, player):
+def generateMoves(snapshot, isPlayer):
     """
     Crear tableros con nuevos movimientos para evaluar nuevos escenarios
     """
@@ -69,7 +69,6 @@ def generateMoves(snapshot, player):
                 game = Gameboard(snapshot.width, snapshot.height,
                                  snapshot.player, snapshot.opponent)
                 game.board = deepcopy(snapshot.board)
-                game.board[x][y] = player
+                game.addChip(isPlayer, x, y)
                 output.append(game)
-                game.print()
     return output
