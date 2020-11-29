@@ -1,5 +1,3 @@
-from Chip import Chip
-
 
 class Gameboard:
     """
@@ -17,8 +15,8 @@ class Gameboard:
             self.board.append([])
             for y in range(width):
                 self.board[x].append("\t")
-        self.chip1 = chip1
-        self.chip2 = chip2
+        self.chip1 = chip1 + "\t"
+        self.chip2 = chip2 + "\t"
 
     def addChip(self, isPlayer1, x, y):
         """
@@ -27,10 +25,10 @@ class Gameboard:
         if 0 <= x and x < self.height and 0 <= y and y < self.width:
             if isPlayer1:
                 if self.board[x][y] == "\t":
-                    self.board[x][y] = self.chip1 + "\t"
+                    self.board[x][y] = self.chip1
             else:
                 if self.board[x][y] == "\t":
-                    self.board[x][y] = self.chip2 + "\t"
+                    self.board[x][y] = self.chip2
         else:
             print("Movimiento fuera de rango")
 
