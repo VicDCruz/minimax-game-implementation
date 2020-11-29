@@ -6,77 +6,67 @@ class Gameboard:
     Simulación de un tablero de juegos
     """
 
-    def __init__(self, width, height, chips1, chips2):
+    def __init__(self, width, height, chip1, chip2):
         """
         Constructor de la clase Gameboard
         """
-        self.heigth = height
+        self.height = height
         self.width = width
-        self.chips1 = chips1
-        self.chips2 = chips2
-        self.totalChips = len(chips1)
+        self.board = []
+        for x in range(height):
+            self.board.append([])
+            for y in range(width):
+                self.board[x].append("\t")
+        self.chip1 = chip1
+        self.chip2 = chip2
 
-    def getChip(self, isPlayer1, index):
+    def addChip(self, isPlayer1, x, y):
         """
-        Obtener una ficha específica de un jugador
+        Añadir una nueva ficha al tablero, dependiendo del jugador
         """
-        if isPlayer1:
-            return self.chips1[index]
-        return self.chips2[index]
-
-    def setChip(self, isPlayer1, index, chip):
-        """
-        Cambiar ficha de un jugador y devolver copia
-        """
-        if isPlayer1:
-            output = self.chips1[:]
+        if 0 <= x and x < self.height and 0 <= y and y < self.width:
+            if isPlayer1:
+                if self.board[x][y] == "\t":
+                    self.board[x][y] = self.chip1 + "\t"
+            else:
+                if self.board[x][y] == "\t":
+                    self.board[x][y] = self.chip2 + "\t"
         else:
-            output = self.chips2[:]
-        output[index] = chip
-        return output
-
-    def moveChip(self, x, y, chip):
-        """
-        Mover una ficha en el tablero
-        """
-        if 0 <= x and x < self.width and 0 <= y and y < self.heigth:
-            chip.x = x
-            chip.y = y
-        else:
-            print("Error: Coordenadas incorrectas")
+            print("Movimiento fuera de rango")
 
     def print(self):
         """
         Imprimir el estado actual del tablero
         """
-        board = []
-        for y in range(self.heigth):
-            board.append([])
-            for x in range(self.width):
-                board[y].append("\t")
-        for chip in self.chips1:
-            if chip.onGameboard:
-                board[chip.x][chip.y] = chip.figure + "\t"
-        for chip in self.chips2:
-            if chip.onGameboard:
-                board[chip.x][chip.y] = chip.figure + "\t"
         base = 8 * self.width
         print(base * "-")
-        for y in range(self.heigth):
+        for x in range(self.height):
             output = ""
-            for x in range(self.width):
-                output = output + board[y][x] + "|"
+            for y in range(self.width):
+                output = output + self.board[x][y] + "|"
             print("|" + output)
             print(base * "-")
 
 
 if __name__ == "__main__":
     print("==== Tablero 3x3 ====")
-    g1 = Gameboard(3, 3, [], [])
+    g1 = Gameboard(3, 3, "X", "O")
+    g1.addChip(True, 0, 0)
+    g1.addChip(False, 1, 1)
+    g1.addChip(False, 2, 2)
+    g1.addChip(True, 0, 2)
     g1.print()
     print("==== Tablero 4x7 ====")
-    g2 = Gameboard(4, 7, [], [])
+    g2 = Gameboard(4, 7, "X", "O")
+    g2.addChip(True, 0, 0)
+    g2.addChip(False, 1, 1)
+    g2.addChip(False, 2, 2)
+    g2.addChip(True, 0, 2)
     g2.print()
     print("==== Tablero 7x3 ====")
-    g3 = Gameboard(7, 3, [], [])
+    g3 = Gameboard(7, 3, "X", "O")
+    g3.addChip(True, 0, 0)
+    g3.addChip(False, 1, 1)
+    g3.addChip(False, 2, 2)
+    g3.addChip(True, 0, 2)
     g3.print()
