@@ -3,9 +3,9 @@ import random
 from Tictactoe import *
 from Minimax import minimax
 
-EASY = 5
-MEDIUM = 15
-HARD = 31
+EASY = 1
+MEDIUM = 4
+HARD = 11
 
 if __name__ == "__main__":
     # === Obtener información básica ===
@@ -53,9 +53,9 @@ if __name__ == "__main__":
             valid = False
             while not valid:
                 try:
-                    print("¿Qué FILA seleccionas?")
+                    print("¿Qué FILA seleccionas? [0 (Hasta arriba), 2(Hasta abajo)]")
                     x = int(input())
-                    print("¿Qué COLUMNA seleccionas?")
+                    print("¿Qué COLUMNA seleccionas? [0 (Hasta arriba), 2(Hasta abajo)]")
                     y = int(input())
                     valid = game.addChip(False, x, y)
                 except KeyboardInterrupt:
