@@ -1,78 +1,88 @@
-from Chip import Chip
-
 
 class Gameboard:
     """
     Simulación de un tablero de juegos
     """
 
-    def __init__(self, width, height, chips1, chips2):
+    def __init__(self, width, height, player, opponent):
         """
         Constructor de la clase Gameboard
         """
-        self.heigth = height
+        self.height = height
         self.width = width
-        self.chips1 = chips1
-        self.chips2 = chips2
-        self.totalChips = len(chips1)
+        self.board = []
+        for x in range(height):
+            self.board.append([])
+            for y in range(width):
+                self.board[x].append("\t")
+        self.player = player
+        self.opponent = opponent
+        self.lastMove = (0, 0)
 
-    def getChip(self, isPlayer1, index):
+    def addChip(self, isPlayer, x, y):
         """
-        Obtener una ficha específica de un jugador
+        Añadir una nueva ficha al tablero, dependiendo del jugador
         """
-        if isPlayer1:
-            return self.chips1[index]
-        return self.chips2[index]
-
-    def setChip(self, isPlayer1, index, chip):
-        """
-        Cambiar ficha de un jugador y devolver copia
-        """
-        if isPlayer1:
-            output = self.chips1[:]
+        if 0 <= x and x < self.height and 0 <= y and y < self.width:
+            if self.board[x][y] == "\t":
+                if isPlayer:
+                    self.board[x][y] = self.player + "\t"
+                else:
+                    self.board[x][y] = self.opponent + "\t"
+                self.lastMove = (x, y)
+                return True
+            else:
+                print("Ya hay una pieza ahí")
+                return False
         else:
-            output = self.chips2[:]
-        output[index] = chip
-        return output
+            print("Movimiento fuera de rango")
+            return False
 
-    def moveChip(self, x, y, chip):
+    def getPlayerFormat(self):
         """
-        Mover una ficha en el tablero
+        Regresar el String con formato para el jugador
         """
-        if 0 <= x and x < self.width and 0 <= y and y < self.heigth:
-            chip.x = x
-            chip.y = y
-        else:
-            print("Error: Coordenadas incorrectas")
+        return self.player + "\t"
+
+    def getOpponentFormat(self):
+        """
+        Regresar el String con formato para el oponente
+        """
+        return self.opponent + "\t"
 
     def print(self):
         """
         Imprimir el estado actual del tablero
         """
-        board = self.heigth * [self.width * ["\t"]]
-        for chip in self.chips1:
-            if chip.onGameboard:
-                board[chip.x][chip.y] = chip.figure
-        for chip in self.chips2:
-            if chip.onGameboard:
-                board[chip.x][chip.y] = chip.figure
         base = 8 * self.width
         print(base * "-")
-        for y in range(self.heigth):
+        for x in range(self.height):
             output = ""
-            for x in range(self.width):
-                output = output + board[y][x] + "|"
+            for y in range(self.width):
+                output = output + self.board[x][y] + "|"
             print("|" + output)
             print(base * "-")
 
 
 if __name__ == "__main__":
     print("==== Tablero 3x3 ====")
-    g1 = Gameboard(3, 3, [], [])
+    g1 = Gameboard(3, 3, "X", "O")
+    g1.addChip(True, 0, 0)
+    g1.addChip(False, 1, 1)
+    g1.addChip(False, 2, 2)
+    g1.addChip(True, 0, 2)
     g1.print()
     print("==== Tablero 4x7 ====")
-    g2 = Gameboard(4, 7, [], [])
+    g2 = Gameboard(4, 7, "X", "O")
+    g2.addChip(True, 0, 0)
+    g2.addChip(False, 1, 1)
+    g2.addChip(False, 2, 2)
+    g2.addChip(True, 0, 2)
     g2.print()
     print("==== Tablero 7x3 ====")
-    g3 = Gameboard(7, 3, [], [])
+    g3 = Gameboard(7, 3, "X", "O")
+    g3.addChip(True, 0, 0)
+    g3.addChip(False, 1, 1)
+    g3.addChip(False, 2, 2)
+    g3.addChip(True, 0, 2)
     g3.print()
