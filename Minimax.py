@@ -1,5 +1,4 @@
 """
-g.print()
 Archivo para crear el algoritmo MinMax para automatizar un juego
 """
 from Gameboard import Gameboard
