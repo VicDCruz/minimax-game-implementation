@@ -2,6 +2,7 @@ from Gameboard import Gameboard
 import random
 from Tictactoe import *
 from Minimax import minimax
+from alpha-beta import alpha_beta_search
 
 EASY = 1
 MEDIUM = 4
@@ -67,6 +68,7 @@ if __name__ == "__main__":
         else:
             print("Es MI turno")
             res = minimax(game, level, True, evaluate, generateMoves)
+            #res = alpha_beta_search(game, level, True, evaluate, generateMoves,-float('inf'),float('inf'))
             print("Moveré la pieza a {1} (Score: {0})".format(res[0], res[1]))
             game.addChip(True, res[1][0], res[1][1])
             turn = user
