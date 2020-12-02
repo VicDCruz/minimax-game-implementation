@@ -7,6 +7,18 @@ EASY = 1
 MEDIUM = 4
 HARD = 11
 
+def randomEval(board, player, opponent):
+    """
+    Obtener score aleatoria
+    """
+    return random.randint(-10, 10)
+
+def randomMoves(snapshot, isPlayer):
+    """
+    Generar hijos aleatorios
+    """
+    return random.randint(1, 10) * [1]
+
 if __name__ == "__main__":
     # === Obtener información básica ===
     print("Introduce tu nombre: ")

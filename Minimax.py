@@ -12,7 +12,9 @@ def minimax(snapshot, depth, isMaximizing, checkScore, getChildren):
     Obtenido de https://www.javatpoint.com/mini-max-algorithm-in-ai
     """
     if depth == 0:
-        return [checkScore(snapshot.board, snapshot.getPlayerFormat(), snapshot.getOpponentFormat()), snapshot.lastMove]
+        if snapshot is not None:
+            return [checkScore(snapshot.board, snapshot.getPlayerFormat(), snapshot.getOpponentFormat()), snapshot.lastMove]
+        return [checkScore(snapshot, snapshot, snapshot), snapshot]
     bestMove = snapshot.lastMove
     if isMaximizing:
         maxScore = float('-inf')
@@ -23,7 +25,9 @@ def minimax(snapshot, depth, isMaximizing, checkScore, getChildren):
             if maxScore == result[0]:
                 bestMove = child.lastMove
         if len(children) == 0:
-            return [checkScore(snapshot.board, snapshot.getPlayerFormat(), snapshot.getOpponentFormat()), snapshot.lastMove]
+            if snapshot is not None:
+                return [checkScore(snapshot.board, snapshot.getPlayerFormat(), snapshot.getOpponentFormat()), snapshot.lastMove]
+            return [checkScore(snapshot, snapshot, snapshot), snapshot]
         return [maxScore, bestMove]
     else:
         minScore = float('inf')
@@ -34,7 +38,9 @@ def minimax(snapshot, depth, isMaximizing, checkScore, getChildren):
             if minScore == result[0]:
                 bestMove = child.lastMove
         if len(children) == 0:
-            return [checkScore(snapshot.board, snapshot.getPlayerFormat(), snapshot.getOpponentFormat()), snapshot.lastMove]
+            if snapshot is not None:
+                return [checkScore(snapshot.board, snapshot.getPlayerFormat(), snapshot.getOpponentFormat()), snapshot.lastMove]
+            return [checkScore(snapshot, snapshot, snapshot), snapshot]
         return [minScore, bestMove]
 
 
