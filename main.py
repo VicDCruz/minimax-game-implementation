@@ -2,7 +2,7 @@ from Gameboard import Gameboard
 import random
 from Tictactoe import *
 from Minimax import minimax
-from alpha-beta import alpha_beta_search
+from AlphaBeta import alpha_beta_search
 
 EASY = 1
 MEDIUM = 4
