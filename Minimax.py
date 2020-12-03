@@ -8,8 +8,7 @@ from Tictactoe import *
 def minimax(snapshot, depth, isMaximizing, checkScore, getChildren):
     """
     Implementación básica de Minimax que genera un árbol de decisión
-    Un snapshot implica una fotografía del tablero, con sus fichas actuales\n
-    Obtenido de https://www.javatpoint.com/mini-max-algorithm-in-ai
+    Un snapshot implica una fotografía del tablero, con sus fichas actuales
     """
     if depth == 0:
         if snapshot is not None:
