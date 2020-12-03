@@ -9,8 +9,7 @@ from Tictactoe import *
 def alpha_beta_search(snapshot, depth, isMaximizing, checkScore, getChildren,alpha,beta):
     """
     Implementación básica de alpha_beta_search que genera un árbol de decisión
-    Un snapshot implica una fotografía del tablero, con sus fichas actuales\n
-    Obtenido de https://www.javatpoint.com/mini-max-algorithm-in-ai
+    Un snapshot implica una fotografía del tablero, con sus fichas actuales
     """
     if depth == 0:
         if snapshot is not None:
